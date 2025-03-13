@@ -33,7 +33,7 @@ namespace FlexDMD
 
     public enum AssetType
     {
-        Unknow, Image, Gif, Video, BMFont
+        Unknow, Image, Gif, Video, BMFont, APNG
     }
 
     public class AssetSrc
@@ -148,7 +148,18 @@ namespace FlexDMD
             }
             def.Id = string.Join("&", parts);
             // Resolve the source path
-            var ext = parts[0].Length > 4 ? parts[0].Substring(parts[0].Length - 4).ToLowerInvariant() : "";
+            //var ext = parts[0].Length > 4 ? parts[0].Substring(parts[0].Length - 4).ToLowerInvariant() : "";
+
+            var ext = "";
+            int lastDotIndex = parts[0].LastIndexOf('.');
+
+            if (lastDotIndex >= 0)
+            {
+                ext = parts[0].Substring(lastDotIndex).ToLowerInvariant();
+            }
+
+            log.Info("Resolving asset with extension: {0}", ext); // Log the extension
+
             if (parts[0].StartsWith("FlexDMD.Resources."))
             {
                 def.SrcType = AssetSrcType.FlexResource;
@@ -194,8 +205,13 @@ namespace FlexDMD
                 def.AssetType = AssetType.Gif;
             else if (ext.Equals(".fnt"))
                 def.AssetType = AssetType.BMFont;
+            else if (ext.Equals(".apng")) // Añadido soporte para .apng
+                def.AssetType = AssetType.APNG;
+
+            log.Info("Asset type resolved as: {0}", def.AssetType); // Log the resolved asset type
+
             // Parse the asset options
-            if (def.AssetType == AssetType.Image)
+            if (def.AssetType == AssetType.Image )
             { // Still image filters
                 foreach (string definition in parts.Skip(1))
                 {
@@ -306,7 +322,7 @@ namespace FlexDMD
         /// </summary>
         public Bitmap GetBitmap(AssetSrc src)
         {
-            if (src.AssetType != AssetType.Image && src.AssetType != AssetType.Gif) throw new Exception("Asked to load a bitmap from a resource of type " + src.AssetType);
+            if (src.AssetType != AssetType.Image && src.AssetType != AssetType.Gif && src.AssetType != AssetType.APNG) throw new Exception("Asked to load a bitmap from a resource of type " + src.AssetType);
             if (_cachedBitmaps.ContainsKey(src.Id))
             { // The requested bitmap is cached
                 return _cachedBitmaps[src.Id].Bitmap;

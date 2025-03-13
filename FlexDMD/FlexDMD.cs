@@ -76,10 +76,13 @@ namespace FlexDMD
                         return new GIFImage(AssetManager, path, name);
                     if (src.AssetType == AssetType.Image)
                         return new ImageSequence(AssetManager, path, name);
+                    if (src.AssetType == AssetType.APNG) // Añadido soporte para APNG
+                        return new APNGImage(AssetManager, path, name);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                log.Error(ex, "Failed to create video actor for path: {0}", path);
                 // Silently discard loading exception and returns null to caller
             }
             return null;
