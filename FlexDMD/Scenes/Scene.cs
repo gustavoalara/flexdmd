@@ -24,7 +24,7 @@ namespace FlexDMD.Scenes
     /// A scene starts with an 'in' animation, then last for 'pauseS' seconds, and ends with an 'out' animation. 
     /// If the pause is negative, then the scene never ends.
     /// </summary>
-    abstract class Scene : Group
+    public abstract class Scene : Group
     {
         private static readonly Logger log = LogManager.GetCurrentClassLogger();
         protected readonly Tweener _tweener = new Tweener();
@@ -206,6 +206,7 @@ namespace FlexDMD.Scenes
         public bool IsFinished()
         {
             return Pause >= 0f && _outAnimLength >= 0 && Time >= _inAnimLength + Pause + _outAnimLength;
+            log.Debug("IsFinished:  Pause: {0}, OutAnimLength: {1}, Time: {2}, Condition: {3}",  Pause, _outAnimLength, Time, _inAnimLength + Pause + _outAnimLength); // Registro de la condición de finalización
         }
     }
 }

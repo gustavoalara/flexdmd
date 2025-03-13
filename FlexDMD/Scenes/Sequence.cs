@@ -19,7 +19,7 @@ using System.Linq;
 
 namespace FlexDMD.Actors
 {
-    class Sequence : Group
+    public class Sequence : Group
     {
         private readonly List<Scene> _pendingScenes = new List<Scene>();
         private bool _finished = true;
