@@ -149,11 +149,28 @@ namespace FlexDMD
             lock (_frameLock)
             {
                 if (Visible && _currentFrame != null)
-                {
-                    Layout.Scale(Scaling, PrefWidth, PrefHeight, Width, Height, out float w, out float h);
-                    Layout.Align(Alignment, w, h, Width, Height, out float x, out float y);
-                    graphics.DrawImage(_currentFrame, (int)(X + x), (int)(Y + y), (int)w, (int)h);
-                }
+
+
+                    try
+                    {
+                        // Crear un nuevo Bitmap y copiar los datos
+                        Bitmap frameToDraw = new Bitmap(_currentFrame.Width, _currentFrame.Height, _currentFrame.PixelFormat);
+                        using (Graphics tempGraphics = Graphics.FromImage(frameToDraw))
+                        {
+                            tempGraphics.DrawImage(_currentFrame, 0, 0);
+                        }
+
+                        Layout.Scale(Scaling, PrefWidth, PrefHeight, Width, Height, out float w, out float h);
+                        Layout.Align(Alignment, w, h, Width, Height, out float x, out float y);
+                        graphics.DrawImage(frameToDraw, (int)(X + x), (int)(Y + y), (int)w, (int)h);
+
+                        frameToDraw.Dispose(); // Liberar el nuevo Bitmap
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error(ex, "Error drawing GIF/APNG frame.");
+                        // Manejar el error adecuadamente
+                    }
             }
         }
 
