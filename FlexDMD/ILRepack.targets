@@ -1,0 +1,24 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="AfterBuild" AfterTargets="Build" Condition="'$(Configuration)' == 'ReleaseCI'">
+    <ItemGroup>
+      <InputAssemblies Include="$(OutputPath)FlexDMD.dll" />
+      <InputAssemblies Include="$(OutputPath)Microsoft.Win32.Registry.dll" />
+      <InputAssemblies Include="$(OutputPath)NLog.dll" />
+      <InputAssemblies Include="$(OutputPath)OpenMcdf.dll" />
+      <InputAssemblies Include="$(OutputPath)System.Buffers.dll" />
+      <InputAssemblies Include="$(OutputPath)System.Memory.dll" />
+      <InputAssemblies Include="$(OutputPath)System.Numerics.Vectors.dll" />
+      <InputAssemblies Include="$(OutputPath)System.Runtime.CompilerServices.Unsafe.dll" />
+      <InputAssemblies Include="$(OutputPath)System.Security.AccessControl.dll" />
+      <InputAssemblies Include="$(OutputPath)System.Security.Principal.Windows.dll" />
+      <InputAssemblies Include="$(OutputPath)NAudio.dll" />
+      <InputAssemblies Include="$(OutputPath)NAudio.Asio.dll" />
+      <InputAssemblies Include="$(OutputPath)NAudio.Core.dll" />
+      <InputAssemblies Include="$(OutputPath)NAudio.Midi.dll" />
+      <InputAssemblies Include="$(OutputPath)NAudio.Wasapi.dll" />
+      <InputAssemblies Include="$(OutputPath)NAudio.WinForms.dll" />
+      <InputAssemblies Include="$(OutputPath)NAudio.WinMM.dll" />
+    </ItemGroup>
+    <ILRepack InputAssemblies="@(InputAssemblies)" OutputAssembly="$(OutputPath)FlexDMD.dll" />
+  </Target>
+</Project>
