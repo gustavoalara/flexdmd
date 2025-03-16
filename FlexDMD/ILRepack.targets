@@ -19,6 +19,6 @@
       <InputAssemblies Include="$(OutputPath)NAudio.WinForms.dll" />
       <InputAssemblies Include="$(OutputPath)NAudio.WinMM.dll" />
     </ItemGroup>
-    <ILRepack InputAssemblies="@(InputAssemblies)" OutputAssembly="$(OutputPath)FlexDMD.dll" />
+    <ILRepack InputAssemblies="@(InputAssemblies)" OutputAssembly="$(OutputPath)\ILMerge\FlexDMD.dll" />
   </Target>
 </Project>
