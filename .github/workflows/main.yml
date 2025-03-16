@@ -42,7 +42,7 @@ jobs:
         run: dotnet build --configuration ReleaseCI --no-restore
         
       - name: Upload Repacked Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: RepackedDLL
           path: FlexDMD/bin/ReleaseCI/ILMerge/FlexDMD.dll
