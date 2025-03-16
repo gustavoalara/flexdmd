@@ -34,7 +34,19 @@ jobs:
   
       - name: Build
         run: MSBuild.exe $Env:GITHUB_WORKSPACE/FlexDMD.sln /p:Configuration="ReleaseCI"
-
+      
+      - name: Create ILMerge folder
+        run: mkdir FlexDMD\bin\ReleaseCI\ILMerge
+        
+      - name: Repack
+        run: dotnet build --configuration ReleaseCI --no-restore
+        
+      - name: Upload Repacked Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: RepackedDLL
+          path: FlexDMD/bin/ReleaseCI/ILMerge/FlexDMD.dll
+          
       - name: Package
         run: |
           mkdir tmp
