@@ -31,15 +31,12 @@ jobs:
       - name: NuGet Restore
         if: steps.cache.outputs.cache-hit != 'true'
         run: nuget restore FlexDMD.sln
-  
-      - name: Build
-        run: MSBuild.exe $Env:GITHUB_WORKSPACE/FlexDMD.sln /p:Configuration="ReleaseCI"
-      
+        
       - name: Create ILMerge folder
         run: mkdir FlexDMD\bin\ReleaseCI\ILMerge
         
-      - name: Repack
-        run: dotnet build --configuration ReleaseCI --no-restore
+      - name: Build
+        run: MSBuild.exe $Env:GITHUB_WORKSPACE/FlexDMD.sln /p:Configuration="ReleaseCI"
         
       - name: Upload Repacked Artifact
         uses: actions/upload-artifact@v4
