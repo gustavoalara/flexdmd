@@ -58,9 +58,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     <PackageReference Include="NLog" Version="5.4.0" />
-    <Reference Include="OpenMcdf, Version=2.3.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>${{ github.workspace }}\packages\OpenMcdf.2.3.1\lib\net40\OpenMcdf.dll</HintPath>
-    </Reference>
+    <PackageReference Include="OpenMcdf" Version="2.4.1" />
     <Reference Include="System" />
     <PackageReference Include="System.Buffers" Version="4.6.0" />
     <Reference Include="System.Configuration" />
