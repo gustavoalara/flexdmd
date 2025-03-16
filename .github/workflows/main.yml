@@ -44,10 +44,8 @@ jobs:
           cp FlexDMD.log.config tmp
           cp FlexDemo\FlexDemo.vpx tmp
           cp -r Scripts tmp/Scripts
-          
-      - name: List tmp contents
-        run: dir tmp
-        
+          dir tmp
+       
       - uses: actions/upload-artifact@v3 # Recomiendo usar v3 de upload-artifact
         with: 
           name: FlexDMD
