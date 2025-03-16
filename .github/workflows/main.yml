@@ -12,7 +12,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v3 # Recomiendo usar v3 de checkout
+      - uses: actions/checkout@v3
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1
@@ -21,7 +21,7 @@ jobs:
         with:
           nuget-version: '5.x'
           
-      - uses: actions/cache@v3 # Usamos la version 3
+      - uses: actions/cache@v3
         with:
           path: ~/.nuget/packages
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
@@ -35,17 +35,29 @@ jobs:
       - name: Build
         run: MSBuild.exe $Env:GITHUB_WORKSPACE/FlexDMD.sln /p:Configuration="ReleaseCI"
 
+      - name: Verify Working Directory
+        run: pwd
+
       - name: Package
         run: |
           mkdir tmp 
+          echo "Created tmp directory"
+          dir tmp
           cp FlexDMDUI\bin\ReleaseCI\FlexDMDUI.exe tmp
+          echo "Copied FlexDMDUI.exe"
           cp FlexDMD\bin\ReleaseCI\ILMerge\FlexDMD.dll tmp
+          echo "Copied FlexDMD.dll"
           cp FlexUDMD\bin\ReleaseCI\FlexUDMD.dll tmp
+          echo "Copied FlexUDMD.dll"
           cp FlexDMD.log.config tmp
+          echo "Copied FlexDMD.log.config"
           cp FlexDemo\FlexDemo.vpx tmp
+          echo "Copied FlexDemo.vpx"
           cp -r Scripts tmp/Scripts
-       
-      - uses: actions/upload-artifact@v2 # Recomiendo usar v3 de upload-artifact
+          echo "Copied Scripts directory"
+          dir tmp
+
+      - uses: actions/upload-artifact@v3
         with: 
           name: FlexDMD
           path: tmp
