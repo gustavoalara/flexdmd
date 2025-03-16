@@ -1,13 +1,10 @@
 name: CI
 
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-
-  # Allows to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
@@ -15,7 +12,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3 # Recomiendo usar v3 de checkout
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1
@@ -24,15 +21,13 @@ jobs:
         with:
           nuget-version: '5.x'
           
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3 # Usamos la version 3
         with:
-          path: C:\Users\runneradmin\.nuget\packages
+          path: ~/.nuget/packages
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
           restore-keys: |
             ${{ runner.os }}-nuget-
-
-                  - name: Cache
-                  
+      
       - name: NuGet Restore
         if: steps.cache.outputs.cache-hit != 'true'
         run: nuget restore FlexDMD.sln
@@ -50,7 +45,7 @@ jobs:
           cp FlexDemo\FlexDemo.vpx tmp
           cp -r Scripts tmp/Scripts
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3 # Recomiendo usar v3 de upload-artifact
         with: 
           name: FlexDMD
           path: tmp
