@@ -84,6 +84,7 @@
     <Reference Include="System.Xml" />
     <PackageReference Include="NAudio" Version="2.2.1" />
     <PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.13" />
+    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="14.5.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actors\Actions.cs" />
@@ -175,15 +176,15 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Magick.NET-Q8-AnyCPU">
-      <Version>14.5.0</Version>
-    </PackageReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Utilisez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est : {0}.</ErrorText>
-    </PropertyGroup> 
+  <Message Text="MERGING: @(InputAssemblies->'%(Filename)') into $(OutputAssembly)" Importance="High" />
+    <ILRepack
+      OutputType="$(OutputType)"
+      MainAssembly="$(AssemblyName).dll"
+      OutputAssembly="$(OutputPath)ILMerge\$(AssemblyName).dll"
+      InputAssemblies="@(InputAssemblies)"
+      InternalizeExcludeAssemblies="@(InternalizeExcludeAssemblies)"
+      WorkingDirectory="$(WorkingDirectory)" />
 </Target>
 </Project>
