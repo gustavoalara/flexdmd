@@ -177,14 +177,29 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-  <Message Text="MERGING: @(InputAssemblies->'%(Filename)') into $(OutputAssembly)" Importance="High" />
+  <Target Name="AfterBuild" AfterTargets="Build" Condition="'$(Configuration)|$(Platform)' == 'ReleaseCI|AnyCPU'">
+    <Message Text="MERGING: @(InputAssemblies->'%(Filename)') into $(OutputAssembly)" Importance="High" />
+    <ItemGroup>
+        <InputAssemblies Include="$(OutputPath)FlexDMD.dll" />
+        <InputAssemblies Include="$(OutputPath)Microsoft.Win32.Registry.dll" />
+        <InputAssemblies Include="$(OutputPath)NLog.dll" />
+        <InputAssemblies Include="$(OutputPath)OpenMcdf.dll" />
+        <InputAssemblies Include="$(OutputPath)System.Buffers.dll" />
+        <InputAssemblies Include="$(OutputPath)System.Memory.dll" />
+        <InputAssemblies Include="$(OutputPath)System.Numerics.Vectors.dll" />
+        <InputAssemblies Include="$(OutputPath)System.Runtime.CompilerServices.Unsafe.dll" />
+        <InputAssemblies Include="$(OutputPath)System.Security.AccessControl.dll" />
+        <InputAssemblies Include="$(OutputPath)System.Security.Principal.Windows.dll" />
+        <InputAssemblies Include="$(OutputPath)NAudio.dll" />
+        <InputAssemblies Include="$(OutputPath)Magick.NET-Q8-AnyCPU.dll" />
+    </ItemGroup>
     <ILRepack
       OutputType="$(OutputType)"
       MainAssembly="$(AssemblyName).dll"
       OutputAssembly="$(OutputPath)ILMerge\$(AssemblyName).dll"
       InputAssemblies="@(InputAssemblies)"
-      InternalizeExcludeAssemblies="@(InternalizeExcludeAssemblies)"
-      WorkingDirectory="$(WorkingDirectory)" />
+      WorkingDirectory="$(OutputPath)" />
+  </Target>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
 </Target>
 </Project>
