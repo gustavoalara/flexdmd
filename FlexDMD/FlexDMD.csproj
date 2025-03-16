@@ -84,6 +84,7 @@
     <Reference Include="System.Xml" />
     <PackageReference Include="NAudio" Version="2.2.1" />
     <PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.13" />
+    <PackageReference Include="StrongNamer" Version="0.2.5" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actors\Actions.cs" />
@@ -184,7 +185,10 @@
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Utilisez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est : {0}.</ErrorText>
-    </PropertyGroup></Target>
+      <Error Condition="!Exists('..\packages\StrongNamer.0.2.5\build\StrongNamer.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StrongNamer.0.2.5\build\StrongNamer.targets'))" />     
+    </PropertyGroup>
+    <Import Project="..\packages\StrongNamer.0.2.5\build\StrongNamer.targets" Condition="Exists('..\packages\StrongNamer.0.2.5\build\StrongNamer.targets')" />
+  </Target>
 <PropertyGroup>
     <ILRepackMergeAssemblies>true</ILRepackMergeAssemblies>
     <ILRepackOutput>FlexDMD.dll</ILRepackOutput>
