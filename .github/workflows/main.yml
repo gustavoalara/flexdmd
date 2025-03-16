@@ -26,11 +26,13 @@ jobs:
           
       - uses: actions/cache@v2
         with:
-          path: ~/.nuget/packages
+          path: C:\Users\runneradmin\.nuget\packages
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
           restore-keys: |
             ${{ runner.os }}-nuget-
-      
+
+                  - name: Cache
+                  
       - name: NuGet Restore
         if: steps.cache.outputs.cache-hit != 'true'
         run: nuget restore FlexDMD.sln
