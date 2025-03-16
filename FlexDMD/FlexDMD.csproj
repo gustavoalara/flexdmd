@@ -194,7 +194,6 @@
         <InputAssemblies Include="$(OutputPath)Magick.NET-Q8-AnyCPU.dll" />
     </ItemGroup>
     <ILRepack
-      OutputType="$(OutputType)"
       MainAssembly="$(AssemblyName).dll"
       OutputAssembly="$(OutputPath)ILMerge\$(AssemblyName).dll"
       InputAssemblies="@(InputAssemblies)"
