@@ -35,12 +35,8 @@ jobs:
       - name: Build
         run: MSBuild.exe $Env:GITHUB_WORKSPACE/FlexDMD.sln /p:Configuration="ReleaseCI"
 
-      - name: Install ILRepack
-        run: dotnet tool install -g ilrepack
-
       - name: Run ILRepack
-        run: ilrepack /keyfile:FlexDMD.snk /internalize /log:ilmerge.log /out:FlexUDMD.dll FlexDMD.dll /lib:bin\ReleaseCI
-
+        run: dotnet "${{ github.workspace }}\packages\ILRepack.Lib.2.0.40\tools\ilrepack.exe" /keyfile:FlexDMD.snk /internalize /log:ilmerge.log /out:FlexUDMD.dll FlexDMD.dll
       - name: Package
         run: |
           mkdir tmp
