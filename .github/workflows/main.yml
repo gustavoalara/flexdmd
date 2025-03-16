@@ -39,7 +39,7 @@ jobs:
         run: dotnet tool install -g ilrepack
 
       - name: Run ILRepack
-        run: ilrepack /keyfile:FlexDMD.snk /internalize /log:ilmerge.log /out:FlexUDMD.dll FlexDMD.dll
+        run: ilrepack /keyfile:FlexDMD.snk /internalize /log:ilmerge.log /out:FlexUDMD.dll FlexDMD.dll /lib:bin\ReleaseCI
 
       - name: Package
         run: |
