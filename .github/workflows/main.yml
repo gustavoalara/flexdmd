@@ -36,7 +36,8 @@ jobs:
         run: MSBuild.exe $Env:GITHUB_WORKSPACE/FlexDMD.sln /p:Configuration="ReleaseCI"
 
       - name: Run ILRepack
-        run: dotnet "${{ github.workspace }}\packages\ILRepack.Lib.2.0.40\tools\ilrepack.exe" /keyfile:FlexDMD.snk /internalize /log:ilmerge.log /out:FlexUDMD.dll FlexDMD.dll
+        run: $Env:GITHUB_WORKSPACE/packages/ILRepack.Lib.2.0.40/tools/ilrepack.exe /keyfile:FlexDMD.snk /internalize /log:ilmerge.log /out:FlexUDMD.dll FlexDMD.dll    
+      
       - name: Package
         run: |
           mkdir tmp
