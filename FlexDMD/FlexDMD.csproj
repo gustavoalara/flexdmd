@@ -58,7 +58,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     <PackageReference Include="NLog" Version="5.4.0" />
-    <PackageReference Include="OpenMcdf" Version="3.0.0-preview.4" />
+    <Reference Include="OpenMcdf, Version=2.2.1.12, Culture=neutral, PublicKeyToken=fdbb1629d7c00800, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenMcdf.2.2.1.12\lib\net40\OpenMcdf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <PackageReference Include="System.Buffers" Version="4.6.0" />
     <Reference Include="System.Configuration" />
