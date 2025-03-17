@@ -196,7 +196,6 @@
         <InputAssemblies Include="$(OutputPath)NAudio.Midi.dll" />
         <InputAssemblies Include="$(OutputPath)NAudio.WinForms.dll" />
         <InputAssemblies Include="$(OutputPath)NAudio.WinMM.dll" />
-        <InputAssemblies Include="$(OutputPath)Magick.NET-Q8-x64.dll" />
     </ItemGroup>
     <ILRepack
       Parallel="true"
