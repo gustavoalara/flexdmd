@@ -192,7 +192,7 @@
         <InputAssemblies Include="$(OutputPath)System.Security.Principal.Windows.dll" />
         <InputAssemblies Include="$(OutputPath)NAudio.dll" />
         <InputAssemblies Include="$(OutputPath)NAudio.Wasapi.dll" />
-        <InputAssemblies Include="$(OutputPath)Magick.NET-Q8-x64.dll" />
+        <InputAssemblies Include="$(OutputPath)Magick.NET-Q8-AnyCPU.dll" />
     </ItemGroup>
     <ILRepack
       Parallel="true"
