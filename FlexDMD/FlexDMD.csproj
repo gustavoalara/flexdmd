@@ -84,7 +84,7 @@
     <Reference Include="System.Xml" />
     <PackageReference Include="NAudio" Version="2.2.1" />
     <PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.13" />
-    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="14.5.0" />
+    <PackageReference Include="Magick.NET-Q8-x64" Version="14.5.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actors\Actions.cs" />
@@ -191,7 +191,8 @@
         <InputAssemblies Include="$(OutputPath)System.Security.AccessControl.dll" />
         <InputAssemblies Include="$(OutputPath)System.Security.Principal.Windows.dll" />
         <InputAssemblies Include="$(OutputPath)NAudio.dll" />
-        <InputAssemblies Include="$(OutputPath)Magick.NET-Q8-AnyCPU.dll" />
+        <InputAssemblies Include="$(OutputPath)NAudio.Wasapi.dll" />
+        <InputAssemblies Include="$(OutputPath)Magick.NET-Q8-x64.dll" />
     </ItemGroup>
     <ILRepack
       Parallel="true"
@@ -202,6 +203,4 @@
             OutputFile="$(OutputPath)\ILMerge\$(AssemblyName).dll"
         />
   </Target>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-</Target>
 </Project>
