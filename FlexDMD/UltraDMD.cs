@@ -232,7 +232,7 @@ namespace UltraDMD
                         {
                             return new FlexDMD.Image(_flexDMD.AssetManager, path);
                         }
-                        else if (src.AssetType == AssetType.Video || src.AssetType == AssetType.Gif)
+                        else if (src.AssetType == AssetType.Video || src.AssetType == AssetType.Gif || src.AssetType == AssetType.APNG)
                         {
                             var actor = (AnimatedActor)_flexDMD.NewVideo("", path);
                             if (actor != null)
