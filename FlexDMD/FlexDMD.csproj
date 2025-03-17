@@ -178,6 +178,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" AfterTargets="Build" Condition="'$(Configuration)|$(Platform)' == 'ReleaseCI|AnyCPU'">
+  <KeyFile>$(ProjectDir)FlexDMD.snk</KeyFile>
     <Message Text="MERGING: @(InputAssemblies->'%(Filename)') into $(OutputAssembly)" Importance="High" />
     <ItemGroup>
         <InputAssemblies Include="$(OutputPath)FlexDMD.dll" />
