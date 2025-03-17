@@ -194,10 +194,13 @@
         <InputAssemblies Include="$(OutputPath)Magick.NET-Q8-AnyCPU.dll" />
     </ItemGroup>
     <ILRepack
-      MainAssembly="$(AssemblyName).dll"
-      OutputAssembly="$(OutputPath)ILMerge\$(AssemblyName).dll"
-      InputAssemblies="@(InputAssemblies)"
-      WorkingDirectory="$(OutputPath)" />
+      Parallel="true"
+            Internalize="true"
+            InternalizeExclude="@(DoNotInternalizeAssemblies)"
+            InputAssemblies="@(InputAssemblies)"
+            TargetKind="Dll"
+            OutputFile="$(OutputPath)\ILMerge\$(AssemblyName).dll"
+        />
   </Target>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
 </Target>
