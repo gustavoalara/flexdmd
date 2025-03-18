@@ -22,7 +22,7 @@ namespace FlexDMD
         private Bitmap _currentFrame = null;
         private readonly object _frameLock = new object();
         private float _canvasWidth, _canvasHeight;
-        private float _prefWidth, _prefHeight; // Añadido aquí
+        private float _prefWidth, _prefHeight; // AÃ±adido aquÃ­
 
         public APNGImage(AssetManager manager, string path, string name = "")
         {
@@ -32,11 +32,11 @@ namespace FlexDMD
             Name = name;
 
             string fullPath = _src.Path;
-
+            
             try
             {
                 var apng = new MagickImageCollection(@"apng:" + fullPath);
-
+                log.Info($"APNGImage: Path: {fullPath}");
                 int frameCount = apng.Count;
                 log.Info($"APNG frame count: {frameCount}");
 
@@ -98,7 +98,7 @@ namespace FlexDMD
                 
                     if (_pos >= _frameDelays.Length - 1)
                     {
-                        log.Info("Detectado el final de la animación.");
+                        log.Info("Detectado el final de la animaciÃ³n.");
                         _endOfAnimation = true;
     
                     }
@@ -127,7 +127,7 @@ namespace FlexDMD
                     {
                         _frames[_pos].ColorSpace = ColorSpace.sRGB;
                         byte[] imageData = _frames[_pos].ToByteArray(MagickFormat.Rgba);
-                        int stride = (int)_frames[_pos].Width * 4; // 4 bytes por píxel (RGBA)
+                        int stride = (int)_frames[_pos].Width * 4; // 4 bytes por pÃ­xel (RGBA)
                         Bitmap frameBitmap = new Bitmap((int)_frames[_pos].Width, (int)_frames[_pos].Height, stride, PixelFormat.Format32bppArgb, System.Runtime.InteropServices.Marshal.UnsafeAddrOfPinnedArrayElement(imageData, 0));
                         Bitmap canvasBitmap = new Bitmap((int)_canvasWidth, (int)_canvasHeight, PixelFormat.Format32bppArgb);
                         using (Graphics g = Graphics.FromImage(canvasBitmap))
