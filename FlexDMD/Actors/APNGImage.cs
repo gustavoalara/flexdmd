@@ -32,11 +32,11 @@ namespace FlexDMD
             Name = name;
 
             string fullPath = _src.Path;
-            
+            log.Info($"APNGImage: Path: {fullPath}");
             try
             {
                 var apng = new MagickImageCollection(@"apng:" + fullPath);
-                log.Info($"APNGImage: Path: {fullPath}");
+                
                 int frameCount = apng.Count;
                 log.Info($"APNG frame count: {frameCount}");
 
