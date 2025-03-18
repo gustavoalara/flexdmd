@@ -30,7 +30,7 @@ namespace FlexDMD
             Name = name;
 
             string fullPath = _src.Path;
-
+            log.Info($"GIF path: {fullPath}");
             try
             {
                 var gif = new MagickImageCollection(@"gif:" + fullPath);
