@@ -276,12 +276,13 @@ namespace FlexDMD.Scenes
             log.Debug("IsFinished:  Pause: {0}, OutAnimLength: {1}, Time: {2}, Condition: {3}",  Pause, _outAnimLength, Time, _inAnimLength + Pause + _outAnimLength); // Registro de la condición de finalización
         }
 	// Clase auxiliar para guardar el estado original de los actores
+
+    }
 	private class OriginalState
 	{
 		public float X { get; set; }
     		public float Y { get; set; }
    		public float Width { get; set; }
     		public float Height { get; set; }
-	}
-    }
+	}	
 }
