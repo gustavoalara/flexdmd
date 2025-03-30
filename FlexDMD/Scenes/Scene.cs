@@ -187,72 +187,7 @@ namespace FlexDMD.Scenes
                         _tweener.Tween(fade, new { Alpha = 1f }, alphaLength);
                         return alphaLength;
                     }
-		case AnimationType.ZoomIn:
-            	{
-                	// Guardar estados originales
-                	foreach (var actor in Children)
-                	{
-                    	originalStates[actor] = new OriginalState {
-                        	X = actor.X,
-                        	Y = actor.Y,
-                        	Width = actor.Width,
-                        	Height = actor.Height
-        	            	};
-	               	}
-
-	                // Configurar estado inicial (zoom muy grande)
-        	        foreach (var actor in Children)
-                	{
-                    		actor.X = actor.X * 5f;
-                    		actor.Y = actor.Y * 5f;
-                    		actor.Width = actor.Width * 5f;
-                    		actor.Height = actor.Height * 5f;
-                	}
-
-	                // Animación para reducir el zoom
-        	        _tweener.Tween(new { scale = 5f }, new { scale = 1f }, zoomLength)
-                	    .OnUpdate(values => {
-                        	foreach (var actor in Children)
-                        	{
-                            		var original = originalStates[actor];
-                            		actor.X = original.X * values.scale;
-                            		actor.Y = original.Y * values.scale;
-                            		actor.Width = original.Width * values.scale;
-                            	actor.Height = original.Height * values.scale;
-                        	}
-                    	});
-
-	           return zoomLength;
-       	    }
-
-	    case AnimationType.ZoomOut:
-       		{
-	                // Guardar estados originales
-	                foreach (var actor in Children)
-	                {
-	                    originalStates[actor] = new OriginalState {
-	                        X = actor.X,
-	                        Y = actor.Y,
-	                        Width = actor.Width,
-	                        Height = actor.Height
-	                    };
-	                }
-
-	                // Animación para aumentar el zoom
-	                _tweener.Tween(new { scale = 1f }, new { scale = 5f }, zoomLength)
-	                    .OnUpdate(values => {
-	                        foreach (var actor in Children)
-	                        {
-	                            var original = originalStates[actor];
-	                            actor.X = original.X * values.scale;
-	                            actor.Y = original.Y * values.scale;
-	                            actor.Width = original.Width * values.scale;
-	                            actor.Height = original.Height * values.scale;
-	                        }
-	                    });
-
-                	return zoomLength;
-            	}
+		
                 case AnimationType.None:
                     return 0f;
                 default:
@@ -279,11 +214,3 @@ namespace FlexDMD.Scenes
 
     }
 }
-private class OriginalState
-{
-	public float X { get; set; }
-	public float Y { get; set; }
-	public float Width { get; set; }
-	public float Height { get; set; }
-}	
-
