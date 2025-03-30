@@ -227,32 +227,32 @@ namespace FlexDMD.Scenes
 
 	    case AnimationType.ZoomOut:
        		{
-                // Guardar estados originales
-                foreach (var actor in Children)
-                {
-                    originalStates[actor] = new OriginalState {
-                        X = actor.X,
-                        Y = actor.Y,
-                        Width = actor.Width,
-                        Height = actor.Height
-                    };
-                }
+	                // Guardar estados originales
+	                foreach (var actor in Children)
+	                {
+	                    originalStates[actor] = new OriginalState {
+	                        X = actor.X,
+	                        Y = actor.Y,
+	                        Width = actor.Width,
+	                        Height = actor.Height
+	                    };
+	                }
 
-                // Animación para aumentar el zoom
-                _tweener.Tween(new { scale = 1f }, new { scale = 5f }, zoomLength)
-                    .OnUpdate(values => {
-                        foreach (var actor in Children)
-                        {
-                            var original = originalStates[actor];
-                            actor.X = original.X * values.scale;
-                            actor.Y = original.Y * values.scale;
-                            actor.Width = original.Width * values.scale;
-                            actor.Height = original.Height * values.scale;
-                        }
-                    });
+	                // Animación para aumentar el zoom
+	                _tweener.Tween(new { scale = 1f }, new { scale = 5f }, zoomLength)
+	                    .OnUpdate(values => {
+	                        foreach (var actor in Children)
+	                        {
+	                            var original = originalStates[actor];
+	                            actor.X = original.X * values.scale;
+	                            actor.Y = original.Y * values.scale;
+	                            actor.Width = original.Width * values.scale;
+	                            actor.Height = original.Height * values.scale;
+	                        }
+	                    });
 
-                return zoomLength;
-            }
+                	return zoomLength;
+            	}
                 case AnimationType.None:
                     return 0f;
                 default:
@@ -278,11 +278,12 @@ namespace FlexDMD.Scenes
 	// Clase auxiliar para guardar el estado original de los actores
 
     }
-	private class OriginalState
-	{
-		public float X { get; set; }
-    		public float Y { get; set; }
-   		public float Width { get; set; }
-    		public float Height { get; set; }
-	}	
 }
+private class OriginalState
+{
+	public float X { get; set; }
+	public float Y { get; set; }
+	public float Width { get; set; }
+	public float Height { get; set; }
+}	
+
