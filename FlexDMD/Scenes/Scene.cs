@@ -91,6 +91,7 @@ namespace FlexDMD.Scenes
             float alphaLength = 0.5f;
             float scrollWLength = 0.5f;
             float scrollHLength = scrollWLength * Height / Width;
+	    float zoomLength = 0.5f; // Duración de las animaciones de zoom
             // TODO Missing animations: ZoomIn = 2, ZoomOut = 3
             switch (animation)
             {
@@ -186,6 +187,28 @@ namespace FlexDMD.Scenes
                         _tweener.Tween(fade, new { Alpha = 1f }, alphaLength);
                         return alphaLength;
                     }
+		case AnimationType.ZoomIn:
+            	{
+                	// Configuración inicial para ZoomIn: escala muy grande y transparente
+                	ScaleX = 5f;
+                	ScaleY = 5f;
+                	Alpha = 0f;
+                
+                	// Animación para reducir la escala y hacer visible
+                	_tweener.Tween(this, new { ScaleX = 1f, ScaleY = 1f, Alpha = 1f }, zoomLength);
+                	return zoomLength;
+            	}
+        	case AnimationType.ZoomOut:
+            	{
+                	// Configuración inicial para ZoomOut: escala normal y visible
+                	ScaleX = 1f;
+                	ScaleY = 1f;
+                	Alpha = 1f;
+                
+                	// Animación para aumentar la escala y hacer transparente
+                	_tweener.Tween(this, new { ScaleX = 5f, ScaleY = 5f, Alpha = 0f }, zoomLength);
+                	return zoomLength;
+            	}
                 case AnimationType.None:
                     return 0f;
                 default:
