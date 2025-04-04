@@ -39,7 +39,7 @@ namespace FlexDMD.Scenes
             }
         }
 
-        public BackgroundScene(IFlexDMD flex, Actor background, AnimationType animateIn, float pauseS, AnimationType animateOut, string id = "") : base(flex, animateIn, pauseS, animateOut, id)
+        public BackgroundScene(IFlexDMD flex, Actor background, AnimationType animateIn, float pauseS, AnimationType animateOut, string id = "", float afactor = 0.5f) : base(flex, animateIn, pauseS, animateOut, id, afactor)
         {
             _background = background;
             if (_background != null) AddActor(_background);
