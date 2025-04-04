@@ -37,13 +37,15 @@ namespace FlexDMD.Scenes
 
         public float Time { get; private set; }
         public float Pause { get; set; }
+	public float Afactor { get; set; }
 
-        public Scene(IFlexDMD flex, AnimationType animateIn, float pauseS, AnimationType animateOut, string id = "") : base(flex)
+        public Scene(IFlexDMD flex, AnimationType animateIn, float pauseS, AnimationType animateOut, string id = "", float afactor = 0.5f) : base(flex)
         {
             _animateIn = animateIn;
             _animateOut = animateOut;
             Pause = pauseS;
             Name = id;
+	    Afactor = afactor;
         }
 
         public override bool Visible
@@ -88,10 +90,10 @@ namespace FlexDMD.Scenes
 
         private float StartAnimation(AnimationType animation)
         {
-            float alphaLength = 0.5f;
-            float scrollWLength = 0.5f;
+            float alphaLength = Afactor;
+            float scrollWLength = Afactor;
             float scrollHLength = scrollWLength * Height / Width;
-	    float zoomLength = 0.5f; // Duración de las animaciones de zoom
+	    float zoomLength = Afactor; 
             // TODO Missing animations: ZoomIn = 2, ZoomOut = 3
             switch (animation)
             {
@@ -210,7 +212,6 @@ namespace FlexDMD.Scenes
             return Pause >= 0f && _outAnimLength >= 0 && Time >= _inAnimLength + Pause + _outAnimLength;
             log.Debug("IsFinished:  Pause: {0}, OutAnimLength: {1}, Time: {2}, Condition: {3}",  Pause, _outAnimLength, Time, _inAnimLength + Pause + _outAnimLength); // Registro de la condición de finalización
         }
-	// Clase auxiliar para guardar el estado original de los actores
-
+	
     }
 }
