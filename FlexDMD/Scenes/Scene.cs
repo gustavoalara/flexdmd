@@ -91,7 +91,6 @@ namespace FlexDMD.Scenes
         private float StartAnimation(AnimationType animation)
         {
             float alphaLength = Afactor;
-            float scrollWLength = Afactor;
             float scrollWLength = Afactor * Height / Width;
     	    float scrollHLength = Afactor;
 	    float zoomLength = Afactor;
