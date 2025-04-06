@@ -91,9 +91,8 @@ namespace FlexDMD.Scenes
         private float StartAnimation(AnimationType animation)
         {
             float alphaLength = Afactor;
-            float scrollWLength = Afactor * Height / Width;
+            float scrollWLength = Afactor;
     	    float scrollHLength = Afactor;
-	    float zoomLength = Afactor;
             // TODO Missing animations: ZoomIn = 2, ZoomOut = 3
             switch (animation)
             {
@@ -189,28 +188,7 @@ namespace FlexDMD.Scenes
                         _tweener.Tween(fade, new { Alpha = 1f }, alphaLength);
                         return alphaLength;
                     }
-		case AnimationType.ZoomIn:
-            {
-                // Iniciar con un tamaño pequeño
-                float initialWidth = Width * 0.1f;
-                float initialHeight = Height * 0.1f;
-                SetSize(initialWidth, initialHeight);
-
-                // Animar al tamaño original
-                _tweener.Tween(this, new { Width = Width, Height = Height }, zoomLength);
-                return zoomLength;
-            }
-        case AnimationType.ZoomOut:
-            {
-                // Iniciar con el tamaño original
-                float originalWidth = Width;
-                float originalHeight = Height;
-
-                // Animar a un tamaño pequeño
-                _tweener.Tween(this, new { Width = originalWidth * 0.1f, Height = originalHeight * 0.1f }, zoomLength);
-                return zoomLength;
-            }
-                case AnimationType.None:
+		case AnimationType.None:
                     return 0f;
                 default:
                     log.Error("Unsupported animation in scene '{0}': {1}", Name, animation);
